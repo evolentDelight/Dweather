@@ -1,0 +1,9 @@
+body{
+    background-color: rgb(0, 183, 255);
+}
+
+#circle{
+    position: absolute;
+    top: 25%;
+    right: 25%;
+}
