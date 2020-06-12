@@ -4,7 +4,8 @@ function DisplayOptions(json){
     var output = "";
 
     if(json == ""){
-        document.getElementById("DisplayOptions").innerHTML = "No Applicable City. Please Re-enter the city.";
+        //document.getElementById("DisplayOptions").innerHTML = "No Applicable City. Please Re-enter the city.";
+        console.log("DisplayOptions -> No Applicable City. Please Re-enter the city., No Applicable City. Please Re-enter the city.");
     }
     else{
         json.forEach(
@@ -12,15 +13,16 @@ function DisplayOptions(json){
                 output += element.title + "<br>";
             }
         )
-        document.getElementById("DisplayOptions").innerHTML = output;
+        //document.getElementById("DisplayOptions").innerHTML = output;
+        console.log("DisplayOptions -> output", output)
     }
 
 }
 
 async function options(city){
-    await fetch('serverscript.js')
+    await fetch('https://www.metaweather.com/api/location/search/?query=' + String(city))
         .then((response) => response.json())
-        .then((json) => DisplayOptions(json));
+        .then((json) => DisplayOptions(json)).catch((error) => console.error('Error: ', error));
 }
 
 function forecast(json){
@@ -41,8 +43,10 @@ function forecast(json){
 
         var humidity = trim.humidity;
 
-        document.getElementById("Tempf" + i).innerHTML = currentTemp + "°C";
-        document.getElementById("dateF" + i).innerHTML = thisDate;
+        //document.getElementById("Tempf" + i).innerHTML = currentTemp + "°C";
+        console.log("forecast -> currentTemp" , currentTemp + "°C")
+        //document.getElementById("dateF" + i).innerHTML = thisDate;
+        console.log("forecast -> thisDate", thisDate)
 
         var out = "";
 
@@ -52,7 +56,8 @@ function forecast(json){
         out += "Wind Speed: " + windSpeed + "mph" + "<br>";
         out += "Humidity: " + humidity + "%" + "<br>";
 
-        document.getElementById("restf" + i).innerHTML = out;
+        //document.getElementById("restf" + i).innerHTML = out;
+        console.log("forecast -> out", out)
     }
 }
 
@@ -73,8 +78,10 @@ function current(json){
 
     var humidity = trim.humidity;
 
-    document.getElementById("currTemp").innerHTML = currentTemp + "°C";
-    document.getElementById("currDate").innerHTML = today;
+    //document.getElementById("currTemp").innerHTML = currentTemp + "°C";
+    console.log("current -> currentTemp," + currentTemp + "°C")
+    //document.getElementById("currDate").innerHTML = today;
+    console.log("current -> today", today)
 
     var out = "";
 
@@ -84,31 +91,33 @@ function current(json){
     out += "Wind Speed: " + windSpeed + "mph" + "<br>";
     out += "Humidity: " + humidity + "%" + "<br>";
 
-    document.getElementById("restData").innerHTML = out;
+    //document.getElementById("restData").innerHTML = out;
+    console.log("current -> out", out)
 
 }
 
 async function getWeather(city){
-    document.getElementById("inputboxtext").innerHTML = "";
+    //document.getElementById("inputboxtext").innerHTML = "";
 
     var jsonObj;
 
     await fetch('https://www.metaweather.com/api/location/search/?query=' + String(city))
         .then((response) => response.json())
-        .then((json) => jsonObj = json);
+        .then((json) => jsonObj = json).catch((error) => console.error('Error: ', error));
 
     if(jsonObj == "" || jsonObj.length > 1){
-        document.getElementById("inputboxtext").innerHTML = "Please Enter A Valid City";
+        //document.getElementById("inputboxtext").innerHTML = "Please Enter A Valid City";
     }
     else{
         await fetch('https://www.metaweather.com/api/location/' + String(jsonObj[0].woeid))
             .then((response) => response.json())
             .then((function(json){
-                document.getElementById("title").innerHTML = json.title + ", " + json.parent.title;
+                //document.getElementById("title").innerHTML = json.title + ", " + json.parent.title;
 
                 current(json);
                 forecast(json);
-            }));
+            }))
+            .catch((error) => console.error('Error: ', error));
     }
 
 }
@@ -131,7 +140,8 @@ function UpdateTime(){
 
     var out = today + " " + hour + time + AMPM;
 
-    document.getElementById("update").innerHTML = out;
+    //document.getElementById("update").innerHTML = out;
+    console.log("UpdateTime -> out", out)
 
 }
 
@@ -146,3 +156,6 @@ function listen(value, event){
         options(value);
     }
 }
+
+console.log("hi");
+getWeather("San Francisco");

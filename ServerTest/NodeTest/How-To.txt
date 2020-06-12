@@ -1,0 +1,2 @@
+Download node-fetch
+Run "node script.ssjs" in terminal
