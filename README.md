@@ -10,5 +10,6 @@ Capabilities of API once CORS is resolved<br>
 Promises<br>
 Async/Await function
 
-All data is retrieved from www.MetaWeather.com <br>
-Credits to Jason Cartwright.
+~~All data is retrieved from www.MetaWeather.com~~ <br>
+~~Credits to Jason Cartwright.~~
+MetaWeather is no longer accessible online.
