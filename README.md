@@ -11,5 +11,5 @@ Promises<br>
 Async/Await function
 
 ~~All data is retrieved from www.MetaWeather.com~~ <br>
-~~Credits to Jason Cartwright.~~
+~~Credits to Jason Cartwright.~~ <br>
 MetaWeather is no longer accessible online.
